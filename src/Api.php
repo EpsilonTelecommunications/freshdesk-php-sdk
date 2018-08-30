@@ -232,11 +232,26 @@ class Api
         return $this->performRequest($method, $url, $options);
     }
 
+    /**
+     * Checks for attachments in the $data payload
+     *
+     * @internal
+     *
+     * @param $data
+     */
     private function hasAttachments($data)
     {
         return (isset($data['attachments']) && count($data['attachments']) > 0);
     }
 
+
+    /**
+     * Formats the data into a Guzzle Mulitpart request format
+     *
+     * @internal
+     *
+     * @param $data
+     */
     private function formatDataForMultipart($data)
     {
         $multipartData = [];
