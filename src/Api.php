@@ -259,11 +259,15 @@ class Api
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 foreach ($value as $k => $v) {
-                    $multipartData[] = [
+                    $multi = [
                         'name' => sprintf('%s[]', $key),
                         'contents' => $v,
-                        'filename' => sprintf('file%d.jpg', $k),
                     ];
+                    if ($key === 'attachments') {
+                        $multi['contents'] = fopen($v, 'r+');
+                        $multi['filename'] = basename($v);
+                    }
+                    $multipartData[] = $multi;
                 }
             } else {
                 $multipartData[] = [
