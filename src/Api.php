@@ -283,13 +283,13 @@ class Api
                 foreach ($array as $k => $v) {
                     $newBaseKey = $baseKey;
                     $newBaseKey[] = sprintf($isFirstLevel ? '%s' : '[%s]', $k);
-                    $this->recursive($flat, $v, $newBaseKey);
+                    $this->flattern($flat, $v, $newBaseKey);
                 }
             } else {
                 foreach ($array as $k => $v) {
                     $newBaseKey = $baseKey;
                     $newBaseKey[] = '[]';
-                    $this->recursive($flat, $v, $newBaseKey);
+                    $this->flattern($flat, $v, $newBaseKey);
                 }
             }
         } else {
