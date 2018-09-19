@@ -340,9 +340,6 @@ class Api
                     return null;
             }
         } catch (RequestException $e) {
-\Log::debug('options!', $options);
-\Log::debug((string) $e->getResponse()->getBody());
-abort(500);
             throw ApiException::create($e);
         }
     }
