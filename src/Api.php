@@ -254,29 +254,60 @@ class Api
      */
     private function formatDataForMultipart($data)
     {
-        $multipartData = [];
+        $flat = [];
 
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                foreach ($value as $k => $v) {
-                    $multi = [
-                        'name' => sprintf('%s[]', $key),
-                        'contents' => $v,
-                    ];
-                    if ($key === 'attachments') {
-                        $multi['contents'] = fopen($v, 'r+');
-                        $multi['filename'] = basename($v);
-                    }
-                    $multipartData[] = $multi;
-                }
-            } else {
-                $multipartData[] = [
-                    'name' => $key,
-                    'contents' => $value,
-                ];
+        $this->flattern($flat, $data);
+
+        $multipartData = [];
+        foreach ($flat as $key => $value) {
+            $multi = [
+                'name' => sprintf('%s', $value['key']),
+                'contents' => $value['value'],
+            ];
+
+            if (strpos($value['key'], 'attachments[]') !== false) {
+                $multi['contents'] = fopen($value['value'], 'r+');
+                $multi['filename'] = basename($value['value']);
             }
+
+            $multipartData[] = $multi;
         }
         return $multipartData;
+    }
+
+    private function flattern(&$flat, $array, $baseKey = [])
+    {
+        $isFirstLevel = count($flat) === 0;
+        if (is_array($array)) {
+            if ($this->isAssoc($array)) {
+                foreach ($array as $k => $v) {
+                    $newBaseKey = $baseKey;
+                    $newBaseKey[] = sprintf($isFirstLevel ? '%s' : '[%s]', $k);
+                    $this->recursive($flat, $v, $newBaseKey);
+                }
+            } else {
+                foreach ($array as $k => $v) {
+                    $newBaseKey = $baseKey;
+                    $newBaseKey[] = '[]';
+                    $this->recursive($flat, $v, $newBaseKey);
+                }
+            }
+        } else {
+            $flat[] = [
+                'key' => implode('', $baseKey),
+                'value' => $array,
+            ];
+        }
+    }
+
+    private function isAssoc(array $arr)
+    {
+
+        if (array() === $arr) {
+            return false;
+        }
+        ksort($arr);
+        return array_keys($arr) !== range(0, count($arr) - 1);
     }
 
     /**
@@ -309,6 +340,9 @@ class Api
                     return null;
             }
         } catch (RequestException $e) {
+\Log::debug('options!', $options);
+\Log::debug((string) $e->getResponse()->getBody());
+abort(500);
             throw ApiException::create($e);
         }
     }
