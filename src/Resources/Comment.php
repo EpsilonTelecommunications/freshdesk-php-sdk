@@ -82,7 +82,7 @@ class Comment extends AbstractResource
      *
      * @api
      * @param int $id
-     * @param array $query
+     * @param array|null $query
      * @return array|null
      * @throws \Freshdesk\Exceptions\AccessDeniedException
      * @throws \Freshdesk\Exceptions\ApiException
@@ -95,7 +95,7 @@ class Comment extends AbstractResource
      * @throws \Freshdesk\Exceptions\UnsupportedAcceptHeaderException
      * @throws \Freshdesk\Exceptions\ValidationException
      */
-    public function all($id, array $query = null)
+    public function all($id, ?array $query = null)
     {
         return $this->api()->request('GET', $this->topicsEndpoint($id . '/comments'), null, $query);
     }

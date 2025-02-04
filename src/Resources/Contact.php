@@ -54,7 +54,7 @@ class Contact extends AbstractResource
      * @throws \Freshdesk\Exceptions\UnsupportedAcceptHeaderException
      * @throws \Freshdesk\Exceptions\ValidationException
      */
-    public function fields(array $query = null)
+    public function fields(?array $query = null)
     {
         return $this->api()->request('GET', '/contact_fields', null, $query);
     }
@@ -68,7 +68,7 @@ class Contact extends AbstractResource
      * 3. The agent whose credentials (API key, username and password) were used to make this API call should be authorised to convert a contact into an agent
      *
      * @param int $id The agent id
-     * @param array|null $query
+     * @param  array|null  $query
      * @return array|null
      * @throws \Freshdesk\Exceptions\AccessDeniedException
      * @throws \Freshdesk\Exceptions\ApiException
@@ -81,7 +81,7 @@ class Contact extends AbstractResource
      * @throws \Freshdesk\Exceptions\UnsupportedAcceptHeaderException
      * @throws \Freshdesk\Exceptions\ValidationException
      */
-    public function makeAgent($id, array $query = null)
+    public function makeAgent($id, ?array $query = null)
     {
         $end = $id . '/make_agent';
 
