@@ -11,14 +11,14 @@ use Freshdesk\tests\TestCase;
  */
 class ForumTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->class = Forum::class;
     }
 
-    public function methodsThatShouldExist()
+    public static function methodsThatShouldExist(): array
     {
         return [
             ['create'],

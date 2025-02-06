@@ -14,14 +14,14 @@ use Freshdesk\tests\TestCase;
  */
 class ApiExceptionTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->class = ApiException::class;
-    } 
+    }
 
-    public function methodsThatShouldExist()
+    public static function methodsThatShouldExist(): array
     {
         return [
             ['create'],

@@ -9,16 +9,16 @@ use Freshdesk\Resources\Group;
  *
  * @author Matthew Clarkson <mpclarkson@gmail.com>
  */
-class GroupApiTest extends TestCase
+class GroupTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->class = Group::class;
     }
 
-    public function methodsThatShouldExist()
+    public static function methodsThatShouldExist(): array
     {
         return [
             ['create'],

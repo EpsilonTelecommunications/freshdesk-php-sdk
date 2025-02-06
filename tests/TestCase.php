@@ -10,10 +10,10 @@ namespace Freshdesk\tests;
 
 use Freshdesk\Api;
 
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
 
-    abstract function methodsThatShouldExist();
+    abstract static function methodsThatShouldExist();
 
     /**
      * @var Api
@@ -26,7 +26,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected $class;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->api = new Api("foo", "bar");
     }

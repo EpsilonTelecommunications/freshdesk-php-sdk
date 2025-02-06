@@ -10,16 +10,16 @@ use Freshdesk\Resources\Company;
  *
  * @author Matthew Clarkson <mpclarkson@gmail.com>
  */
-class CompanyApiTest extends TestCase
+class CompanyTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->class = Company::class;
-    } 
+    }
 
-    public function methodsThatShouldExist()
+    public static function methodsThatShouldExist(): array
     {
         return [
             ['create'],

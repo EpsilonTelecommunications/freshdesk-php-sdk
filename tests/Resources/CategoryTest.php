@@ -11,14 +11,14 @@ use Freshdesk\tests\TestCase;
  */
 class CategoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->class = Category::class;
     }
 
-    public function methodsThatShouldExist()
+    public static function methodsThatShouldExist(): array
     {
         return [
             ['create'],

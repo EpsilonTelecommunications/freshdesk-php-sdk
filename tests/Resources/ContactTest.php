@@ -9,17 +9,17 @@ use Freshdesk\Resources\Contact;
  *
  * @author Matthew Clarkson <mpclarkson@gmail.com>
  */
-class ContactApiTest extends TestCase
+class ContactTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->class = Contact::class;
     }
 
-    public function methodsThatShouldExist()
+    public static function methodsThatShouldExist(): array
     {
         return [
             ['create'],

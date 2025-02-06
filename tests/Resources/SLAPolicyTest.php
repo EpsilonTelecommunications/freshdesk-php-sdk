@@ -11,14 +11,14 @@ use Freshdesk\tests\TestCase;
  */
 class SLAPolicytest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->class = SLAPolicy::class;
     }
 
-    public function methodsThatShouldExist()
+    public static function methodsThatShouldExist(): array
     {
         return [
             ['all'],
