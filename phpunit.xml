@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="tests/bootstrap.php">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         colors="true" bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="Freshdesk PHP SDK API v2">
             <directory>tests</directory>
